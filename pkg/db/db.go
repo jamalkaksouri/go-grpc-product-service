@@ -19,8 +19,14 @@ func Init(url string) Handler {
 		log.Fatalln(err)
 	}
 
-	_ = db.AutoMigrate(&models.Product{})
-	_ = db.AutoMigrate(&models.StockDecreaseLog{})
+	err = db.AutoMigrate(
+		&models.Product{},
+		&models.StockDecreaseLog{},
+	)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	return Handler{db}
 }

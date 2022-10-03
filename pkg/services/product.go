@@ -14,11 +14,11 @@ type Server struct {
 }
 
 func (s *Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest) (*pb.CreateProductResponse, error) {
-	var product models.Product
-
-	product.Name = req.Name
-	product.Stock = req.Stock
-	product.Price = req.Price
+	product := models.Product{
+		Name:  req.Name,
+		Stock: req.Stock,
+		Price: req.Price,
+	}
 
 	if result := s.H.DB.Create(&product); result.Error != nil {
 		return &pb.CreateProductResponse{
@@ -69,7 +69,7 @@ func (s *Server) DecreaseStock(ctx context.Context, req *pb.DecreaseStockRequest
 	if product.Stock <= 0 {
 		return &pb.DecreaseStockResponse{
 			Status: http.StatusConflict,
-			Error:  "Stock too low",
+			Error:  "stock too low",
 		}, nil
 	}
 
@@ -78,7 +78,7 @@ func (s *Server) DecreaseStock(ctx context.Context, req *pb.DecreaseStockRequest
 	if result := s.H.DB.Where(&models.StockDecreaseLog{OrderId: req.OrderId}).First(&log); result.Error == nil {
 		return &pb.DecreaseStockResponse{
 			Status: http.StatusConflict,
-			Error:  "Stock already decreased",
+			Error:  "stock already decreased",
 		}, nil
 	}
 

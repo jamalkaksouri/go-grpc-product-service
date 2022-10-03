@@ -19,7 +19,7 @@ func main() {
 		log.Fatalln("Failed at config", err)
 	}
 
-	h := db.Init(c.DBUrl)
+	h := db.Init(c.DbUrl)
 
 	lis, err := net.Listen("tcp", c.Port)
 
@@ -27,7 +27,7 @@ func main() {
 		log.Fatalln("Failed to listing:", err)
 	}
 
-	fmt.Println("Product Svc on", c.Port)
+	fmt.Println("Product Service on port:", c.Port)
 
 	s := services.Server{
 		H: h,
