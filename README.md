@@ -34,7 +34,7 @@ curl --request POST --url http://localhost:3000/product --header 'Authorization:
 ```
 Find One Product
 ```bash
-curl --request POST --url http://localhost:3000/product --header 'Authorization: Bearer YOUR_TOKEN' --header 'Content-Type: application/json' --data '{ "name": "Product A", "stock": 5, "price": 15}'
+curl --request POST --url http://localhost:3000/product/1 --header 'Authorization: Bearer YOUR_TOKEN'
 ```
 
 ## How to install make command in windows

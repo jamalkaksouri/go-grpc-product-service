@@ -14,11 +14,11 @@ type Server struct {
 }
 
 func (s *Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest) (*pb.CreateProductResponse, error) {
-	product := models.Product{
-		Name:  req.Name,
-		Stock: req.Stock,
-		Price: req.Price,
-	}
+	var product models.Product
+
+	product.Name = req.Name
+	product.Stock = req.Stock
+	product.Price = req.Price
 
 	if result := s.H.DB.Create(&product); result.Error != nil {
 		return &pb.CreateProductResponse{
