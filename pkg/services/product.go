@@ -17,6 +17,7 @@ func (s *Server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest
 	var product models.Product
 
 	product.Name = req.Name
+	product.Sku = req.Name
 	product.Stock = req.Stock
 	product.Price = req.Price
 

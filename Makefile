@@ -7,3 +7,6 @@ vet:
 	go vet cmd/main.go
 	shadow cmd/main.go
 .PHONY:vet
+
+output:
+	go build -o ./cmd/productApp.exe cmd/main.go
